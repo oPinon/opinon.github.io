@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Olivier Pinon PortFolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://dl.dropboxusercontent.com/u/20662250/PortFolio/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://dl.dropboxusercontent.com/u/20662250/PortFolio/starter-template.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">oPinon</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+
+            <li ><a href="index.html">About</a></li>
+
+            <li class="dropdown active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
+            <ul class="dropdown-menu" id="projectList">
+              <li><a href="#">Index</a></li>
+              <li><a href="#Fractal3D">Fractal3D (OpenGL)</a></li>
+              <li><a href="#SuperSampling">SuperSampling (Gimp)</a></li>
+              <li><a href="#ArenaPlatformer">ArenaPlatformer (Java Game Engine)</a></li>
+              <li><a href="#PlanetSurfer">PlanetSurfer (Unity)</a></li>
+              <li><a href="#VectorTiles">Vector Tiles (Leaflet)</a></li>
+              <li><a href="#DustForce">DustForce (ArtRage)</a></li>
+              <li><a href="#ShootMania">ShootMania Faith model</a></li>
+            </ul>
+            </li>
+
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Links<span class="caret"></span></a>
+            <ul class="dropdown-menu" id="projectList">
+              <li><a href="https://github.com/oPinon">Github/oPinon</a></li>
+              <li><a href="https://ca.linkedin.com/pub/olivier-pinon/b1/705/b83">Linkedin</a></li>
+              <li><a href="http://symert.tumblr.com/">Tumblr</a></li>
+            </ul>
+            </li>
+            
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<style>
+
+  .project {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+  }
+
+  .anchor {
+    position: relative;
+    top: -100px;
+  }
+
+</style>
+
+    <div class="container">
+
+      <div class="starter-template">
+
+        <div id="content"></div>
+
+      </div>
+
+    </div><!-- /.container -->
+
+    <script>
+
+      window.loadProject = function(name) {
+
+        if(name == "") { name = "index"; }
+        request = new XMLHttpRequest();
+        request.open("GET", "projects/" + name + ".html", true);
+        request.onload = function() {
+          var content = document.getElementById("content");
+          content.innerHTML = request.responseText;
+        };
+        request.send();
+      }
+
+      var projectList = document.getElementById("projectList");
+
+      function updateContent() {
+        var hash = window.location.hash;
+        var projectName = hash.substr(hash.indexOf("#")+1);
+        var qLoc = projectName.indexOf("?");
+        if(qLoc > 0) { projectName = projectName.substr(0,qLoc); }
+        loadProject(projectName);
+      }
+      updateContent();
+      window.onhashchange = updateContent;
+
+    </script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

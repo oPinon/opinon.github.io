@@ -1,0 +1,36 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a name="VectorTiles" class="anchor"></a>
+    <h2 class="panel-title">Rendering a map as vector tiles for the web</h2>
+  </div>
+  <style>
+    img {
+      width: 100%;
+    }
+    li {
+      /*float: left;*/
+    }
+  </style>
+  <div class="panel-body">
+    <p><b>Note :</b> Made in collaboration with <a href="https://ici.radio-canada.ca/">Radio-Canada</a> and <a href="http://www.polymtl.ca/recherche/rc/en/professeurs/details.php?NoProf=568">École Polytechnique de Montréal</a></p>.
+    <p>
+      We created several components to display the map :
+      <ul>
+        <li>A C++ program that converts the raw map to a tree of vector tiles (as .json files)</li>
+        <li>A simple server that hosts the tiles</li>
+        <li>A plugin for <a href="http://leafletjs.com/">Leaflet</a> that displays the tiles.</li>
+      </ul>
+      The polygons can then be stylized using any CSS (they are SVGs) and D3.js if there is some data. <br>
+      A User Guide and some samples are available <a href="https://dl.dropboxusercontent.com/u/20662250/VectorTiles/indexEn.html">here</a>.
+    </p>
+    <a href="https://dl.dropboxusercontent.com/u/20662250/VectorTiles/indexEn.html"><img src="projects/VectorTiles.jpg"/></a>
+    <a href="http://ici.radio-canada.ca/elections-canada-2015/vote-voisins">Votes 2011</a>
+    <a href="http://ici.radio-canada.ca/nouvelles/elections/canada-2015/Votes_voisins/carte-aires.html">Votes 2011 Transparency</a>
+    <a href="http://ici.radio-canada.ca/nouvelles/elections/canada-2015/Votes_voisins/carte-pourcentage.html">Votes 2011 Transparency</a>
+    <a href="http://s.radio-canada.ca/sujet/elections-canada-2015/_html/content/Intersection/nouvelle-carte-electorale-fiches-circonscriptions-elections-federales.html">Ridges</a>
+    <a href="http://ici.radio-canada.ca/nouvelles/special/2015/10/resultats-Canada-2015/index.html">Votes 2015</a>
+    <a href="http://s.radio-canada.ca/sujet/elections-canada-2015/_html/content/Votes2015/indexAlpha.html">Votes 2015</a>
+    <a href="http://ici.radio-canada.ca/elections-canada-2015/circonscriptions-canada">Scroller</a>
+    <a href="http://ici.radio-canada.ca/nouvelles/special/2015/10/enquete-guerre-bande-gaza/">Scroller Gaza</a>
+  </div>
+</div>
