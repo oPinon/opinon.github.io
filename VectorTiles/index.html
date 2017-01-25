@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Tuiles Vectorielles</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://dl.dropboxusercontent.com/u/20662250/PortFolio/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1>Tuiles vectorielles <small>Guide d'utilisation</small></h1>
+        <a class="btn btn-default" href="indexEn.html">EN</a><a class="btn btn-default" href="index.html">FR</a>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Principe</h3>
+        </div>
+        <div class="panel-body">
+
+          <p>
+
+            Il s'agit d'un outil pour afficher et styliser des cartes webs. Il y a 3 composantes :
+
+          </p>
+        
+          <div class="list-group">
+          <a href="#Tiler" class="list-group-item">
+            <h4 class="list-group-item-heading">Découper une carte en tuiles</h4>
+            <p class="list-group-item-text">Il s'agit d'un logiciel C++ prenant en entrée une carte TopoJson.</p>
+          </a>
+          <a href="#Server" class="list-group-item">
+            <h4 class="list-group-item-heading">Héberger les tuiles sur un serveur</h4>
+            <p class="list-group-item-text">Le serveur s'occuper principalement d'héberger les tuiles.</p>
+          </a>
+          <a href="#Leaflet" class="list-group-item">
+            <h4 class="list-group-item-heading">Afficher la carte en Leaflet</h4>
+            <p class="list-group-item-text">Il s'agit d'utiliser un plugin Leaflet qui permet d'afficher et de styliser la carte dans une page web.</p>
+          </a>
+          </div>
+
+        </div>        
+      </div>    
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a class="anchor" name="Leaflet"></a>
+          <h3 class="panel-title">Afficher la carte</h3>
+        </div>
+        <div class="panel-body">
+
+          
+          <link href="https://dl.dropboxusercontent.com/u/20662250/VectorTiles/leaflet_v1.css" rel="stylesheet">
+          <script src="https://dl.dropboxusercontent.com/u/20662250/VectorTiles/d3.min.js"></script>
+          <script src="https://dl.dropboxusercontent.com/u/20662250/VectorTiles/leaflet_v1.js"></script>
+          <script src="https://dl.dropboxusercontent.com/u/20662250/VectorTiles/leaflet_v1.js"></script>
+          <script src="https://dl.dropboxusercontent.com/u/20662250/VectorTiles/vectorTiles.js"></script>
+          <div id="map1" style="width: 100%; height: 320px"></div>
+          <style> #map1 { fill: none; stroke: #000; } </style>
+          <script>
+            var map = new L.map("map1", { center : [ 56.5, -96 ], zoom : 3 });
+            var tiles = new L.VectorTiles(
+                "https://dl.dropboxusercontent.com/u/20662250/VectorTiles/Tiles/Fed2013/{z}/{y}/{x}.json", {
+                  maxNativeZoom : 10,
+                  stringified : false
+                }
+            );
+            map.addLayer(tiles);
+          </script>
+          <br>
+          <p>
+            Le serveur contient déjà plusieurs cartes. Il se peut que vous n'ayez pas besoin d'en ajouter. Commençons donc par l'affichage de la carte. Afin d'afficher les tuiles vectorielles dans un navigateur web, vous pouvez utiliser <a href="http://leafletjs.com/">Leaflet</a> (version 1.0 ou plus récente) ainsi que notre <a href="https://dl.dropboxusercontent.com/u/20662250/VectorTiles/vectorTiles.js">plugin</a> dédié aux tuiles vectorielles. Vous aurez aussi besoin de <a href="http://d3js.org/">D3.js</a>.
+          </p>
+          <p> 
+            Le code pour cette carte est le suivant :
+          </p>
+          <pre><code class="prettyprint">
+    &ltlink href="leaflet_v1.css" rel="stylesheet"&gt
+    &ltscript src="d3.min.js"&gt&lt/script&gt
+    &ltscript src="leaflet_v1.js"&gt&lt/script&gt
+    &ltscript src="leaflet_v1.js"&gt&lt/script&gt
+    &ltscript src="vectorTiles.js"&gt&lt/script&gt
+    &ltdiv id="map" style="width: 100%; height: 320px"&gt&lt/div&gt
+    &ltstyle&gt #map { fill: none; stroke: #000; } &lt/style&gt
+    &ltscript&gt
+      var map = new L.map("map", { center : [ 56.5, -96 ], zoom : 3 });
+      var tiles = new L.VectorTiles(
+          "http://159.33.95.81/Service1.svc/Fed2013/{z}/{y}/{x}.json" , {
+            maxNativeZoom : 12
+          }
+      );
+      map.addLayer(tiles);
+    &lt/script&gt
+          </code></pre>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Stylisation de la carte</h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            Les tuiles affichées sont en fait chacune un svg. Elles sont donc stylisables avec un grand nombre de possibilités. Le plugin <i>L.VectorTiles</i> prend en argument optionnel une fonction permettant de styliser les tuiles. Cette fonction correspond à <code>styler</code> dans le code
+          <p>
+          <pre><code class="prettyprint">
+  var styler = {
+    styleFunction : function(features) { }
+  }
+  var tiles = new L.VectorTiles(
+      "http://159.33.95.81/Service1.svc/sectionsVotes/{z}/{y}/{x}.json" , {
+        style : styler
+      }
+  );
+          </code></pre>
+          <p>
+            (TODO : trop long)
+            Cet argument <code>style</code> doit avoir comme attribut <code> styleFunction </code> une fonction prenant en argument une sélection <i>D3</i> (ici <code>features</code>). Les éléments de cette sélection sont la liste des polygones de la carte à afficher. Vous pouvez appeler n'importe quelle fonction D3 sur ces éléments, comme par exemple <code>features.style("fill","#F00")</code> pour changer leur style, ou <code>features.attr("class","myClass")</code> pour changer leur classe (ou n'importe quel autre attribut).
+          </p>
+          <p>
+            Mais le plus intéressant est sans doute de styliser chaque polygone différemment en fonction de certaine données. C'est ce qui permet par exemple de faire un <i>Choropleth</i>. Les fonctions pour modifier des sélections D3 peuvent prendre en argument des constantes, mais aussi des fonctions retournant un résultat différent pour chaque polygone. Ainsi, on peut retourner une couleur qui dépend de l'<i>ID</i> du polygône :
+          <code class="prettyprint">
+  features.style("fill", function(d) {
+      return colorRamp( d.id );
+  })
+          </code>
+          </p>
+          
+          <p>
+            Afin d'être le moins volumineuses possible, les tuiles vectorielles ne contiennent pas de <i>métadonnées</i>; en revanche, elles contiennent un identifiant pour chaque polygone. C'est ensuite à vous de récupérer les données associées à cet identifiant. Pour les tuiles hebergées sur <a href="http://159.33.95.81/">http://159.33.95.81/</a>, les propriétés des polygones sont hébergées à
+            <a href="http://159.33.95.81/Tiles/sectionsVotes/properties.json">http://159.33.95.81/Tiles/sectionsVotes/properties.json</a> (ici, pour la carte <i>sectionsVotes</i>). Ainsi, pour récupérer les propriétés d'un polygone <i>d</i>, il faut aller chercher <code>properties[d.id]</code>.
+          </p>
+          <p>
+            Enfin, si vous voulez que la carte puisse changer de style dynamiquement, il vous suffit de modifier la <code>styleFunction</code> de l'objet <code>styler</code> et d'appeler <code>tiles.updateStyle()</code>. Par exemple, pour ajouter une interaction au clic :
+          </p>
+          <pre><code class="prettyprint">
+  var selectedId = undefined;
+  styler.styleFunction = function(features) {
+
+    features.on("click", function(d) {
+      selectedId = d.id;
+      tiles.updateStyle();
+    })
+    features.attr("class", function(d) {
+      return d.id == selectedId ? "selected" : "unselected";
+    })
+
+  }
+          </code></pre>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Choropleth</h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            <div id="map2" style="width: 100%; height: 320px"></div>
+            <style> #map2 { fill: none; stroke: #000; stroke-width: 0.3; } </style>
+            <script>
+              var color = function(s) {
+                // this function is completely empirical
+                var v = s.split('-');
+                var v0 = parseInt(v[0]);
+                var v1 = parseInt(v[1]);
+                return "rgb("+
+                  parseInt(v1 % 256)
+                  +","+
+                  parseInt(v1*100 % 256)
+                  +","+
+                  parseInt(v0/10 % 256)
+                  +")";
+              }
+              var map = new L.map("map2", { center : [ 56.5, -96 ], zoom : 3 });
+              var styler = {};
+              var tiles = new L.VectorTiles(
+                  "https://dl.dropboxusercontent.com/u/20662250/VectorTiles/Tiles/SectionsVote/{z}/{y}/{x}.json", {
+                    maxNativeZoom : 9,
+                    stringified : false,
+                    style : styler
+                  }
+              );
+              map.addLayer(tiles);
+              d3.json("https://dl.dropboxusercontent.com/u/20662250/VectorTiles/Tiles/SectionsVote/properties.json", function(properties) {
+                  styler.styleFunction = function(features) {
+                    features.style("fill", function(d) {
+                      return color(properties[d.id]);
+                    })
+                  };
+                  tiles.updateStyle();
+                }
+              )
+            </script>
+          </p>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a class="anchor" name="Tiler"></a>
+          <h3 class="panel-title">Découpage d'une carte en tuiles</h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            Pour utiliser une nouvelle carte, il faut commencer par la découper en tuiles avec le programme suivant. C'est un logiciel en ligne de commande prenant en entrée une carte au format <a href="https://github.com/mbostock/topojson/wiki">TopoJSON</a> (qui peut être obtenue à partir d'un <i>ShapeFile</i> ou d'un <i>GeoJSON</i>) et créant un arbre de dossiers contenant les tuiles vectorielles. Le programme exporte aussi un fichier <i>properties.json</i> contenant les propriétés polygones telles qu'elles se trouvaient dans le topojson originel. Vous pouvez télécharger un exécutable ici :
+            <br>
+          </p>
+          <div>
+            <a class="btn btn-default" href="JsonTiler2_Win32.exe">Windows</a>
+            <a class="btn btn-default" href="JsonTiler2_Lin64.exe">Linux</a>
+            <a class="btn btn-default">Mac (TODO)</a>
+            <a class="btn btn-default" href="Source.zip">Sources</a>
+          </div>
+          <br>
+          <p>
+            Si vous souhaitez compiler le code source (en C++), ses dépendances sont la bibliothèque <a href="https://github.com/miloyip/rapidjson">RapidJSON</a> et <a href="http://www.angusj.com/delphi/clipper.php">Clipper</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a class="anchor" name="Server"></a>
+          <h3 class="panel-title">Serveur de tuiles</h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            Le serveur sert à héberger les tuiles vectorielles. Il peut s'agir d'un serveur "passif" (Dropbox, Google Drive, etc..) mais un serveur "actif" permet de réduire le nombre de tuiles : <br>
+            En effet, le nombre de tuiles est exponentiel avec le niveau de zoom maximal. Ce nombre peut être fortement réduit en profitant du fait que de nombreuses tuiles sont identiques. En effet, dans un océan, ou à l'intérieur d'un polygone, toutes les tuiles sont identiques : il s'agit de carrés uniformes. Il n'est donc pas nécessaire de découper et de stocker ces tuiles. En revanche, il faut que le serveur qui héberge les tuiles puisse comprendre qu'une tuile est au milieu de l'océan. <br>
+            Le serveur <a href="http://159.33.95.81/Service1.svc/">http://159.33.95.81/Service1.svc/</a> est donc un serveur "actif"; c'est un serveur Windows, exécutant le service WPF suivant : <a href="https://dl.dropboxusercontent.com/u/20662250/VectorTiles/TileService.svc.cs">TileService.svc.cs</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Liste des cartes disponibles sur <a href="http://159.33.95.81/">http://159.33.95.81/</a> (TODO : afficher)</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <li><a href="http://159.33.95.81/Service1.svc/Fed2003/0/0/0.json">Fed2003</a></li>
+            <li><a href="http://159.33.95.81/Service1.svc/Fed2013/0/0/0.json">Fed2013</a></li>
+            <li><a href="http://159.33.95.81/Service1.svc/SectionsVotes/0/0/0.json">SectionsVotes</a></li>
+            <li><a href="http://159.33.95.81/Service1.svc/Fed2013_coasts/0/0/0.json">Fed2013_coasts</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Exemple complet</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <a href="http://ici.radio-canada.ca/nouvelles/elections/canada-2015/Votes_voisins/carte.html"><img
+            src="https://dl.dropboxusercontent.com/u/20662250/PortFolio/projects/VectorTiles.jpg"
+            style="width: 90%"
+            ></img></a>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://dl.dropboxusercontent.com/u/20662250/PortFolio/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+      code {
+        color: #A2304D;
+        background-color: #F5F5F5;
+      }
+    </style>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  </body>
+</html>
