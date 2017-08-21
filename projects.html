@@ -13,54 +13,36 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="https://raw.githubusercontent.com/twbs/bootstrap/v4-dev/docs/examples/starter-template/starter-template.css" rel="stylesheet">
+    
   </head>
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">oPinon</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">oPinon</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-            <li ><a href="index.html">About</a></li>
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
 
-            <li class="dropdown active">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
-            <ul class="dropdown-menu" id="projectList">
-              <li><a href="#">Index</a></li>
-              <li><a href="#Fractal3D">Fractal3D (OpenGL)</a></li>
-              <li><a href="#SuperSampling">SuperSampling (Gimp)</a></li>
-              <li><a href="#ArenaPlatformer">ArenaPlatformer (Java Game Engine)</a></li>
-              <li><a href="#PlanetSurfer">PlanetSurfer (Unity)</a></li>
-              <li><a href="#VectorTiles">Vector Tiles (Leaflet)</a></li>
-              <li><a href="#DustForce">DustForce (ArtRage)</a></li>
-              <li><a href="#ShootMania">ShootMania Faith model</a></li>
-            </ul>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">About <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Links</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="https://github.com/oPinon">Github/oPinon</a>
+              <a class="dropdown-item" href="https://ca.linkedin.com/pub/olivier-pinon/b1/705/b83">Linkedin</a>
+              <a class="dropdown-item" href="http://symert.tumblr.com/">Tumblr</a>
+            </div>
+          </li>
 
-            <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Links<span class="caret"></span></a>
-            <ul class="dropdown-menu" id="projectList">
-              <li><a href="https://github.com/oPinon">Github/oPinon</a></li>
-              <li><a href="https://ca.linkedin.com/pub/olivier-pinon/b1/705/b83">Linkedin</a></li>
-              <li><a href="http://symert.tumblr.com/">Tumblr</a></li>
-            </ul>
-            </li>
-            
-          </ul>
-        </div><!--/.nav-collapse -->
+        </ul>
       </div>
     </nav>
 
@@ -120,6 +102,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://unpkg.com/popper.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
   </body>
